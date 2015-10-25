@@ -1,0 +1,14 @@
+c:\users\k.aushev\documents\visual studio 2010\Projects\SimpleRPC\SimpleRPC\bin\Debug\SimpleRPC.exe
+c:\users\k.aushev\documents\visual studio 2010\Projects\SimpleRPC\SimpleRPC\bin\Debug\SimpleRPC.pdb
+c:\users\k.aushev\documents\visual studio 2010\Projects\SimpleRPC\SimpleRPC\obj\x86\Debug\SimpleRPC.Properties.Resources.resources
+c:\users\k.aushev\documents\visual studio 2010\Projects\SimpleRPC\SimpleRPC\obj\x86\Debug\SimpleRPC.exe
+c:\users\k.aushev\documents\visual studio 2010\Projects\SimpleRPC\SimpleRPC\obj\x86\Debug\SimpleRPC.pdb
+C:\Users\k.aushev\Documents\Visual Studio 2010\Projects\SimpleRPC\SimpleRPC\obj\x86\Debug\SimpleRPC.csprojResolveAssemblyReference.cache
+C:\Users\k.aushev\Documents\Visual Studio 2010\Projects\SimpleRPC\SimpleRPC\obj\x86\Debug\SimpleRPC.csproj.GenerateResource.Cache
+C:\Users\kostean\Documents\Visual Studio 2010\Projects\SimpleRPC\SimpleRPC\obj\x86\Debug\SimpleRPC.exe
+C:\Users\kostean\Documents\Visual Studio 2010\Projects\SimpleRPC\SimpleRPC\obj\x86\Debug\SimpleRPC.pdb
+C:\Users\kostean\Documents\Visual Studio 2010\Projects\SimpleRPC\SimpleRPC\bin\Debug\SimpleRPC.exe
+C:\Users\kostean\Documents\Visual Studio 2010\Projects\SimpleRPC\SimpleRPC\bin\Debug\SimpleRPC.pdb
+C:\Users\kostean\Documents\Visual Studio 2010\Projects\SimpleRPC\SimpleRPC\obj\x86\Debug\SimpleRPC.csprojResolveAssemblyReference.cache
+C:\Users\kostean\Documents\Visual Studio 2010\Projects\SimpleRPC\SimpleRPC\obj\x86\Debug\SimpleRPC.Properties.Resources.resources
+C:\Users\kostean\Documents\Visual Studio 2010\Projects\SimpleRPC\SimpleRPC\obj\x86\Debug\SimpleRPC.csproj.GenerateResource.Cache
