@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace SimpleRPC
 {
@@ -32,6 +34,29 @@ namespace SimpleRPC
             
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="types">Типы доступные для передач по сети</param>
+        public datagrammParser(params  Type[] types)
+        {
+            listOfEnabledTypes = new List<Type>();
+            foreach (var t in types)
+                listOfEnabledTypes.Add(t);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objects">Объекты, типы которых можно передавать по сети</param>
+        public datagrammParser(params object[] objects)
+        {
+            listOfEnabledTypes = new List<Type>();
+            foreach (object tt in objects)
+            {
+               
+              listOfEnabledTypes.Add(tt.GetType());
+            }
+        }
 
         #region isInListOfEnabledTypes
 
@@ -65,29 +90,19 @@ namespace SimpleRPC
 
 
 
-        /// <summary>
-        /// Является ли данный объект доступным для передачи в качестве параметра
-        /// </summary>
-        /// <param name="TypeHash">Object.GetType().GetHashCode()</param>
-        /// <returns></returns>
-        public bool isInListOfEnabledTypes(int TypeHash)
-        {
-            
-
-            foreach (var t in listOfEnabledTypes)
-                if (TypeHash == t.GetHashCode()) return true;
-
-            return false;
-        }
+       
 
         #endregion
 
+
+
+        #region oldVersion
         /// <summary>
         /// Упаковывает переменные в байтовый массив
         /// </summary>
         /// <param name="vals">'funcName', [] funcParams</param>
         /// <returns></returns>
-        public byte [] pack(params object[] vals)
+        public byte [] oldPack(params object[] vals)
         {
             List<byte> dataToSent = new List<byte>();
             
@@ -161,7 +176,7 @@ namespace SimpleRPC
                 
         }
 
-        public Object[] unpack(byte [] mass)
+        public Object[] oldUnpack(byte [] mass)
         {
             List<Object> objList = new List<object>();
             MemoryStream str = new MemoryStream(mass);
@@ -193,5 +208,15 @@ namespace SimpleRPC
             return null;
         }
 
+        #endregion
+
+
+
+       
+
+        
+
     }
+
+    
 }

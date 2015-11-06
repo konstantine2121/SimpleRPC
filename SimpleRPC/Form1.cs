@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 
 
 namespace SimpleRPC
@@ -19,19 +20,38 @@ namespace SimpleRPC
             InitializeComponent();
             RPC_Example r = new RPC_Example();
 
-            r.puckk((Int32)5, "fuck!");
+            string str = "hello!";
 
-            var o1= 4;
-            var o2= 3;
-            Type t = o1.GetType();
-            s(o1, o2);
+            /*ObjectInfo oo = new ObjectInfo();
+            oo.typeName = "sds";
+            oo.objectData = new byte[10];
+            for (int f = 0; f < 10; f++)
+            {
+                oo.objectData[f] =(byte) f;
+            }*
+             */
+
+            ff asfsa = new ff();
+           
+
+            ObjectInfo o1 = new ObjectInfo(asfsa);
+
+
+
+            object d1 = o1.GetObject();
+
+
+            //           string hi =(string) o1.GetObject();
+            
+            int b = 5;
+
         }
 
-        
-
-        int s(int o1, int o2)
+        struct ff
         {
-            return o1 + o2;
+
+            public int[] fff;
         }
+
     }
 }

@@ -13,7 +13,7 @@ namespace SimpleRPC
     [AttributeUsage(AttributeTargets.Method)]
     public class RPC : Attribute
     {
-        protected static byte[] markers = { 0x55, 0xFF, 0x00, 0x55, 0xAA, 0xCC, 0xF0, 0xCC, 0x55, 0xFF, 0x00, 0x55, 0xAA, 0xCC, 0xF0, 0xCC };
+        protected static byte[] markers =  { 0x55, 0xFF, 0x00, 0x55, 0xAA, 0xCC, 0xF0, 0xCC, 0x55, 0xFF, 0x00, 0x55, 0xAA, 0xCC, 0xF0, 0xCC };
 
         public static byte Markers(int i)
         {
@@ -99,12 +99,10 @@ namespace SimpleRPC
         {
             // Создаем UdpClient для чтения входящих данных
             UdpClient receivingUdpClient = new UdpClient(localPort);
-
             IPEndPoint RemoteIpEndPoint = null;
 
             try
             {
-
                 while (true)
                 {
                     // Ожидание дейтаграммы
