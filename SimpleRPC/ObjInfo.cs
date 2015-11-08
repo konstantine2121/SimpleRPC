@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 namespace SimpleRPC
 {
     /// <summary>
-    /// Структура для перевода объекта структуры в массив байт и обратно без потери информации. Подходит для работы со структурами в которых нет ссылочных значений. Не подходит для работы с классами.
+    /// Структура для перевода объекта структуры в массив байт и обратно без потери информации. Подходит для работы со структурами в которых нет ссылочных значений. Также возможна передача объектов string. Не подходит для работы с классами.
     /// </summary>
     public struct ObjectInfo
     {
@@ -30,18 +30,36 @@ namespace SimpleRPC
             typeName = t.FullName;
             nameLenght = (short)typeName.Length;
 
+            if (t != typeof(string))
+            {
+                try
+                {
+                    IntPtr ptr1 = new IntPtr();
 
-            IntPtr ptr1 = new IntPtr();
-            
-            objectLenght = (short)Marshal.SizeOf(obj);//!!
-            IntPtr ptr = Marshal.AllocHGlobal(objectLenght);
-            Marshal.StructureToPtr(obj, ptr, false);
+                    objectLenght = (short)Marshal.SizeOf(obj);//!!
+                    IntPtr ptr = Marshal.AllocHGlobal(objectLenght);
+                    Marshal.StructureToPtr(obj, ptr, false);
 
-            objectData = new byte[objectLenght];
+                    objectData = new byte[objectLenght];
 
-            Marshal.Copy(ptr, objectData, 0, objectLenght);
-            Marshal.FreeHGlobal(ptr);
+                    Marshal.Copy(ptr, objectData, 0, objectLenght);
+                    Marshal.FreeHGlobal(ptr);
+                }
+                catch
+                {
+                    throw new Exception("Данная структура не подходит для преоброзавания этим методом!");
+                }
+            }
+            else 
+            {
+                MemoryStream str = new MemoryStream();
+                BinaryWriter bw = new BinaryWriter(str);
+                string s = (string) obj;
+                bw.Write(s);
+                objectData = str.ToArray();
 
+                objectLenght =(short) objectData.Length;
+            }
         }
 
         /// <summary>
@@ -94,10 +112,24 @@ namespace SimpleRPC
         /// <returns></returns>
         public object GetObject()
         {
-            IntPtr ptr = Marshal.AllocHGlobal(objectLenght);
-            Marshal.Copy(objectData, 0, ptr, objectLenght);
-            Object obj = Marshal.PtrToStructure(ptr, this.GetObjType());
-            return obj;
+            if (this.typeName != typeof(string).FullName)
+            {
+                IntPtr ptr = Marshal.AllocHGlobal(objectLenght);
+                Marshal.Copy(objectData, 0, ptr, objectLenght);
+                Object obj = Marshal.PtrToStructure(ptr, this.GetObjType());
+                return obj;
+            }
+            else
+            {
+
+                MemoryStream str = new MemoryStream(objectData);
+                BinaryReader br = new BinaryReader(str);
+                string s = br.ReadString();
+                
+
+                return s;
+
+            }
         }
 
         /// <summary>
@@ -138,12 +170,5 @@ namespace SimpleRPC
 
 
 
-    public class huh
-    {
-        public int [] ll;
-        public huh(object o)
-        {
-             ll= new int[1];
-        }
-    }
+   
 }

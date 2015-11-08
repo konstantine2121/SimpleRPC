@@ -13,12 +13,14 @@ namespace SimpleRPC
     /// </summary>
     class datagrammParser
     {
+        /// <summary>
+        /// Типы доступные для передач по сети
+        /// </summary>
         protected List<Type> listOfEnabledTypes;
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="listOfTypes">Перечнь дупустимых передаваемых элементов</param>
         public datagrammParser()
         {
             listOfEnabledTypes = new List<Type>();
@@ -44,20 +46,7 @@ namespace SimpleRPC
             foreach (var t in types)
                 listOfEnabledTypes.Add(t);
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="objects">Объекты, типы которых можно передавать по сети</param>
-        public datagrammParser(params object[] objects)
-        {
-            listOfEnabledTypes = new List<Type>();
-            foreach (object tt in objects)
-            {
-               
-              listOfEnabledTypes.Add(tt.GetType());
-            }
-        }
-
+       
         #region isInListOfEnabledTypes
 
         /// <summary>
@@ -211,7 +200,24 @@ namespace SimpleRPC
         #endregion
 
 
+        public byte[] puck(params object[] objects)
+        {
+            MemoryStream stream = new MemoryStream();
+            BinaryWriter br = new BinaryWriter(stream);
 
+            foreach (var obj in objects)
+            {
+                ObjectInfo oi = new ObjectInfo(obj);
+                byte [] objMass = oi.GetMass();
+                int lenght = objMass.Length;
+
+                br.Write(lenght);
+                br.Write(objMass);
+            }
+
+
+            return null;
+        }
        
 
         

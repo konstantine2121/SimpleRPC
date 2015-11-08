@@ -35,7 +35,7 @@ namespace SimpleRPC
 
 
 
-            parser = new datagrammParser();
+            parser = new datagrammParser(typeof(Int32), typeof(Int64), typeof(String), typeof(float), typeof(double));
 
         }
 

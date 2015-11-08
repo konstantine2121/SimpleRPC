@@ -13,6 +13,9 @@ namespace SimpleRPC
     [AttributeUsage(AttributeTargets.Method)]
     public class RPC : Attribute
     {
+        /// <summary>
+        ///  маркер, который задается в начале сообщения 
+        /// </summary>
         protected static byte[] markers =  { 0x55, 0xFF, 0x00, 0x55, 0xAA, 0xCC, 0xF0, 0xCC, 0x55, 0xFF, 0x00, 0x55, 0xAA, 0xCC, 0xF0, 0xCC };
 
         public static byte Markers(int i)
@@ -20,13 +23,21 @@ namespace SimpleRPC
             if (i >= 0 & i < markers.Length)
                 return markers[i];
             else return 0;
-
         }
+
         public static int MarkersLenght
         {
             get
             {
                 return markers.Length;
+            }
+        }
+
+        public byte[] getMarkers
+        {
+            get
+            {
+                return markers;
             }
         }
 
@@ -39,8 +50,6 @@ namespace SimpleRPC
         {
             if (data != null && data.Length > markers.Length)
             {
-
-
                 for (int i = 0; i < markers.Length; i++)
                 {
                     if (markers[i] != data[i])
@@ -48,15 +57,14 @@ namespace SimpleRPC
                         return false;
                     }
                 }
-
                 return true;
             }
-
             return false;
         }
 
 
         public enum RPCsentTo { All, Client, Server };
+
 
 
 
